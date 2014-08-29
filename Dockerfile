@@ -5,10 +5,12 @@ RUN apt-get update
 RUN apt-get install -y ruby ruby-dev libpq-dev build-essential
 RUN gem install sinatra bundler --no-ri --no-rdoc
 
-ADD . /opt/dockernotes
-
+ADD Gemfile /opt/dockernotes/Gemfile
+ADD Gemfile.lock /opt/dockernotes/Gemfile.lock
 WORKDIR /opt/dockernotes
 RUN bundle install
+
+ADD . /opt/dockernotes
 
 EXPOSE 3000
 CMD bundle exec rails s
